@@ -30,7 +30,7 @@ public class Main {
             System.out.println("Nomor " + (i + 1));
             soalPilgan[i].tampilkanSoal();
             soalPilgan[i].tampilkanJawaban();
-            soalPilgan[i].getSoal();
+            soalPilgan[i].tampilan();
             System.out.println();
         }
         System.out.println("===================================================");
@@ -42,7 +42,7 @@ public class Main {
         System.out.println("Nomor 1.");
         soalIsian[0] = new SoalIsian("Apa ibu kota Indonesia?", jawabanIsian1);
         System.out.println(soalIsian[0].getPertanyaan());
-        soalIsian[0].getSoal();
+        soalIsian[0].tampilan();
         System.out.println();
 
         System.out.println("===================================================");
@@ -51,7 +51,7 @@ public class Main {
         SoalEsai[] SoalEsai = new SoalEsai[5];
         System.out.println("Nomor 1.");
         SoalEsai[0] = new SoalEsai("Jelaskan Sejarah Kemerdekaan Indonesia", "sejarah.pdf", "https://www.example.com/sejarah.pdf");
-        SoalEsai[0].getSoal();
+        SoalEsai[0].tampilan();
 
     }
 }
