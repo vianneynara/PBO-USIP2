@@ -20,7 +20,7 @@ public abstract class SoalUjian {
         return jawaban;
     }
 
-    public abstract void getSoal();
+    public abstract void tampilan();
 }
 
 class SoalPilihanGanda extends SoalUjian {
@@ -43,7 +43,7 @@ class SoalPilihanGanda extends SoalUjian {
     }
 
     @Override
-    public void getSoal() {
+    public void tampilan() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Masukkan jawaban Anda: ");
         String jawaban = scanner.nextLine();
@@ -68,7 +68,7 @@ class SoalIsian extends SoalUjian {
     }
 
     @Override
-    public void getSoal() {
+    public void tampilan() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Jawaban : ");
         String jawIsian = scanner.nextLine();
@@ -104,7 +104,7 @@ class SoalEsai extends SoalUjian {
     }
 
     @Override
-    public void getSoal() {
+    public void tampilan() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(super.getPertanyaan());
         System.out.print("Nama File     : ");
