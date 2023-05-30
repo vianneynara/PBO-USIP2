@@ -5,19 +5,19 @@ import java.util.Scanner;
 public abstract class SoalUjian {
     
     protected String soal;
-    protected Jawaban jawaban;
+    protected Jawaban kunciJawaban;
 
-    public SoalUjian(String soal, Jawaban jawaban) {
+    public SoalUjian(String soal, Jawaban kunciJawaban) {
         this.soal = soal;
-        this.jawaban = jawaban;
+        this.kunciJawaban = kunciJawaban;
     }
 
     public String getPertanyaan() {
         return soal;
     }
 
-    public Jawaban getJawaban() {
-        return jawaban;
+    public Jawaban getKunciJawaban() {
+        return kunciJawaban;
     }
 
     public abstract void tampilan();
@@ -27,8 +27,8 @@ class SoalPilihanGanda extends SoalUjian {
     
     private String[] pilihanJawaban;
 
-    public SoalPilihanGanda(String soal, String[] pilihanJawaban, Jawaban jawaban) {
-        super(soal, jawaban);
+    public SoalPilihanGanda(String soal, String[] pilihanJawaban, Jawaban kunciJawaban) {
+        super(soal, kunciJawaban);
         this.pilihanJawaban = pilihanJawaban;
     }
 
@@ -45,16 +45,18 @@ class SoalPilihanGanda extends SoalUjian {
     @Override
     public void tampilan() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Masukkan jawaban Anda: ");
-        String jawaban = scanner.nextLine();
+        String input;
+        do {
+            System.out.print("Masukkan jawaban Anda: ");
+            input = scanner.nextLine();
 
-        if (jawaban.isEmpty()) {
-            System.out.println("Anda belum memasukkan jawaban.");
-            return;
-        }
-        char inputJawaban = Character.toUpperCase(jawaban.charAt(0));
-        String kunciJawaban = getJawaban().getLabel().toUpperCase();
-        if (kunciJawaban.equals(pilihanJawaban[inputJawaban - 'A'].toUpperCase()))
+            if (input.isEmpty())
+                System.out.println("Anda belum memasukkan jawaban.");
+        } while (input.isEmpty());
+
+        char inputJawaban = Character.toUpperCase(input.charAt(0));
+
+        if (getKunciJawaban().getLabel().equalsIgnoreCase(pilihanJawaban[inputJawaban - 'A']))
             System.out.println("Jawaban Anda benar!");
         else
             System.out.println("Jawaban Anda salah!");
@@ -63,24 +65,27 @@ class SoalPilihanGanda extends SoalUjian {
 
 class SoalIsian extends SoalUjian {
     
-    public SoalIsian(String soal, Jawaban jawaban) {
-        super(soal, jawaban);
+    public SoalIsian(String soal, Jawaban kunciJawaban) {
+        super(soal, kunciJawaban);
     }
 
     @Override
     public void tampilan() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Jawaban : ");
-        String jawIsian = scanner.nextLine();
-        if (jawIsian.length() > 20) System.out.println("Maksimal 20 karakter.");
-        else {
-            Jawaban jawabanIsian = new Jawaban(jawIsian);
-            if (jawabanIsian.getLabel().equalsIgnoreCase(getJawaban().getLabel())) {
-                System.out.println("Jawaban Anda benar!");
-            } else {
-                System.out.println("Jawaban Anda salah!");
-            }
-        }
+        String input;
+        do {
+            System.out.print("Jawaban: ");
+            input = scanner.nextLine();
+            if (input.length() > 20)
+                System.out.println("Maksimal 20 karakter.");
+        } while (input.length() > 20);
+
+        Jawaban inputJawaban = new Jawaban(input);
+
+        if (inputJawaban.getLabel().equalsIgnoreCase(getKunciJawaban().getLabel()))
+            System.out.println("Jawaban Anda benar!");
+        else
+            System.out.println("Jawaban Anda salah!");
     }
 }
 
