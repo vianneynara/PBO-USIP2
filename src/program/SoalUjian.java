@@ -20,14 +20,14 @@ public abstract class SoalUjian {
         return kunciJawaban;
     }
 
-    public abstract void tampilan();
+    public abstract void jawabLangsung();
 }
 
 class SoalPilihanGanda extends SoalUjian {
     
-    private String[] pilihanJawaban;
+    private Jawaban[] pilihanJawaban;
 
-    public SoalPilihanGanda(String soal, String[] pilihanJawaban, Jawaban kunciJawaban) {
+    public SoalPilihanGanda(String soal, Jawaban[] pilihanJawaban, Jawaban kunciJawaban) {
         super(soal, kunciJawaban);
         this.pilihanJawaban = pilihanJawaban;
     }
@@ -42,24 +42,52 @@ class SoalPilihanGanda extends SoalUjian {
         }
     }
 
+    /**
+     * Metode ini menjawab pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
+     * pilihan yang diberikan.
+     * <br><br><center><code>
+     *     (input < 65) || (input >= 65 + pilihanJawaban.length)
+     * </code></center><br>
+     * Merupakan kondisi untuk mengecek apakah character yang dimasukkan memiliki bobot yang sesuai dengan tabel
+     * ASCII yaitu A = 65 hingga E = 69
+     * */
     @Override
-    public void tampilan() {
+    public void jawabLangsung() {
         Scanner scanner = new Scanner(System.in);
-        String input;
+        char input;
         do {
             System.out.print("Masukkan jawaban Anda: ");
-            input = scanner.nextLine();
+            input = scanner.nextLine().toUpperCase().charAt(0);
 
-            if (input.isEmpty())
-                System.out.println("Anda belum memasukkan jawaban.");
-        } while (input.isEmpty());
+            if ((input < 65) || (input >= 65 + pilihanJawaban.length))
+                System.out.println("Masukkan jawaban yang sesuai!");
 
-        char inputJawaban = Character.toUpperCase(input.charAt(0));
+        } while ((input < 65) || (input >= 65 + pilihanJawaban.length));
 
-        if (getKunciJawaban().getLabel().equalsIgnoreCase(pilihanJawaban[inputJawaban - 'A']))
+        /* Mengkonversi char ASCII menjadi index dari 0 hingga 4. */
+        int inputIndex = switch (input) {
+            case 'A' -> 0;
+            case 'B' -> 1;
+            case 'C' -> 2;
+            case 'D' -> 3;
+            default -> 4;
+        };
+
+        if (getKunciJawaban().getLabel().equalsIgnoreCase(pilihanJawaban[inputIndex].getLabel()))
             System.out.println("Jawaban Anda benar!");
         else
             System.out.println("Jawaban Anda salah!");
+    }
+
+    public String getSoal() {
+        var sb = new StringBuilder();
+        sb.append(soal).append("\n");
+        char option = 65; // 65 adalah A.
+        for (Jawaban jawaban : pilihanJawaban)
+            sb.append("\t")
+                    .append(option++)
+                    .append(jawaban.getLabel()).append("\n");
+        return sb.toString();
     }
 }
 
@@ -70,7 +98,7 @@ class SoalIsian extends SoalUjian {
     }
 
     @Override
-    public void tampilan() {
+    public void jawabLangsung() {
         Scanner scanner = new Scanner(System.in);
         String input;
         do {
@@ -109,7 +137,7 @@ class SoalEsai extends SoalUjian {
     }
 
     @Override
-    public void tampilan() {
+    public void jawabLangsung() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(super.getPertanyaan());
         System.out.print("Nama File     : ");
