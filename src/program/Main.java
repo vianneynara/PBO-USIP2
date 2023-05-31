@@ -3,7 +3,8 @@ package program;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+
+    public static void ujian() {
         Scanner scanner = new Scanner(System.in);
         MataKuliah matkul = new MataKuliah("Fakultas Sains dan Teknologi", "PBO", "Ibu Tatik", "2", "Senin, 27 Mei 2023");
 
@@ -51,7 +52,9 @@ public class Main {
         SoalEsai[] SoalEsai = new SoalEsai[5];
         System.out.println("Nomor 1.");
         SoalEsai[0] = new SoalEsai("Jelaskan Sejarah Kemerdekaan Indonesia", "sejarah.pdf", "https://www.example.com/sejarah.pdf");
-        SoalEsai[0].tampilan();
+        SoalEsai[0].tampilan();}
 
+    public static void main(String[] args) {
+        ujian();
     }
 }
