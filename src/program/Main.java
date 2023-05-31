@@ -1,11 +1,8 @@
 package program;
 
-import java.util.Scanner;
-
 public class Main {
 
     public static void ujian() {
-        Scanner scanner = new Scanner(System.in);
         MataKuliah matkul = new MataKuliah("Fakultas Sains dan Teknologi", "PBO", "Ibu Tatik", "2", "Senin, 27 Mei 2023");
 
         System.out.println("\t\t\t\t\tLEMBAR JAWAB MAHASISWA");
