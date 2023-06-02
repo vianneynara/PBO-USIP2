@@ -7,6 +7,10 @@ public abstract class SoalUjian {
     protected String soal;
     protected Jawaban kunciJawaban;
 
+    public SoalUjian(String soal) {
+        this(soal, null);
+    }
+
     public SoalUjian(String soal, Jawaban kunciJawaban) {
         this.soal = soal;
         this.kunciJawaban = kunciJawaban;
@@ -20,7 +24,7 @@ public abstract class SoalUjian {
         return kunciJawaban;
     }
 
-    public abstract void jawabLangsung();
+    public abstract String getSoal();
 }
 
 class SoalPilihanGanda extends SoalUjian {
@@ -32,10 +36,6 @@ class SoalPilihanGanda extends SoalUjian {
         this.pilihanJawaban = pilihanJawaban;
     }
 
-    public void tampilkanSoal() {
-        System.out.println(super.getPertanyaan());
-    }
-
     public void tampilkanJawaban() {
         for (int i = 0; i < pilihanJawaban.length; i++) {
             System.out.println("\t" + (char) ('A' + i) + ". " + pilihanJawaban[i]);
@@ -43,7 +43,7 @@ class SoalPilihanGanda extends SoalUjian {
     }
 
     /**
-     * Metode ini menjawab pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
+     * Metode ini mensimpanJawaban pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
      * pilihan yang diberikan.
      * <br><br><center><code>
      *     (input < 65) || (input >= 65 + pilihanJawaban.length)
@@ -51,16 +51,15 @@ class SoalPilihanGanda extends SoalUjian {
      * Merupakan kondisi untuk mengecek apakah character yang dimasukkan memiliki bobot yang sesuai dengan tabel
      * ASCII yaitu A = 65 hingga E = 69
      * */
-    @Override
-    public void jawabLangsung() {
+    public void jawab() {
         Scanner scanner = new Scanner(System.in);
         char input;
         do {
-            System.out.print("Masukkan jawaban Anda: ");
+            System.out.print("Masukkan simpanJawabanan Anda: ");
             input = scanner.nextLine().toUpperCase().charAt(0);
 
             if ((input < 65) || (input >= 65 + pilihanJawaban.length))
-                System.out.println("Masukkan jawaban yang sesuai!");
+                System.out.println("Masukkan simpanJawabanan yang sesuai!");
 
         } while ((input < 65) || (input >= 65 + pilihanJawaban.length));
 
@@ -79,14 +78,18 @@ class SoalPilihanGanda extends SoalUjian {
             System.out.println("Jawaban Anda salah!");
     }
 
+    public void simpanJawaban(Jawaban jawaban) {
+        kunciJawaban = jawaban;
+    }
+
     public String getSoal() {
         var sb = new StringBuilder();
         sb.append(soal).append("\n");
         char option = 65; // 65 adalah A.
-        for (Jawaban jawaban : pilihanJawaban)
+        for (Jawaban simpanJawabanan : pilihanJawaban)
             sb.append("\t")
                     .append(option++)
-                    .append(jawaban.getLabel()).append("\n");
+                    .append(simpanJawabanan.getLabel()).append("\n");
         return sb.toString();
     }
 }
@@ -97,8 +100,10 @@ class SoalIsian extends SoalUjian {
         super(soal, kunciJawaban);
     }
 
-    @Override
-    public void jawabLangsung() {
+    /**
+     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah simpanJawabanan secara langsung.
+     * */
+    public void jawab() {
         Scanner scanner = new Scanner(System.in);
         String input;
         do {
@@ -115,6 +120,15 @@ class SoalIsian extends SoalUjian {
         else
             System.out.println("Jawaban Anda salah!");
     }
+
+    public void simpanJawaban(Jawaban jawaban) {
+        kunciJawaban = jawaban;
+    }
+
+    @Override
+    public String getSoal() {
+        return getPertanyaan();
+    }
 }
 
 class SoalEsai extends SoalUjian {
@@ -123,26 +137,38 @@ class SoalEsai extends SoalUjian {
     private String linkFile;
 
     public SoalEsai(String soal, String namaFile, String linkFile) {
-        super(soal, null);
+        super(soal);
         this.namaFile = namaFile;
         this.linkFile = linkFile;
     }
 
-    public String getnamaFile() {
-        return namaFile;
-    }
-
-    public String getlinkFile() {
-        return linkFile;
-    }
-
-    @Override
-    public void jawabLangsung() {
+    /**
+     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah simpanJawabanan secara langsung.
+     * */
+    public void jawab() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(super.getPertanyaan());
         System.out.print("Nama File     : ");
-        String namaFile = scanner.nextLine();
+        namaFile = scanner.nextLine();
         System.out.print("Link gambar   :  ");
-        String linkFile = scanner.nextLine();
+        linkFile = scanner.nextLine();
+
+        /* Menyimpan jawaban. */
+        simpanJawaban(namaFile, linkFile);
+        System.out.println("Jawaban anda sudah tersimpan!");
+    }
+
+    /**
+     * Menyimpan masukan jawaban ke kelas.
+     * @param namaFile nama file.
+     * @param linkFile link file.
+     * */
+    public void simpanJawaban(String namaFile, String linkFile) {
+        kunciJawaban = new Jawaban(namaFile, linkFile);
+    }
+
+    @Override
+    public String getSoal() {
+        return getPertanyaan();
     }
 }
