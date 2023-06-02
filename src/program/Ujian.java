@@ -1,7 +1,7 @@
 package program;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Ujian {
     private SoalUjian[] listSoal;
@@ -13,7 +13,15 @@ public class Ujian {
 
     /* Constructor utama. */
     public Ujian(SoalUjian[] listSoal, MataKuliah mataKuliah, Dosen dosen, String namaUjian, String semester, Date tanggal) {
-        this.listSoal = listSoal;
+        this.listSoal = Stream.of(
+             getSoalPilihanGanda(listSoal),
+             getSoalIsian(listSoal),
+             getSoalEsai(listSoal)
+        )
+        /* Mengkonversi Stream menjadi Array. */
+        .flatMap(Arrays::stream)
+        .toArray(SoalUjian[]::new);
+
         this.mataKuliah = mataKuliah;
         this.dosen = dosen;
         this.namaUjian = namaUjian;
@@ -66,18 +74,19 @@ public class Ujian {
     public void startUjian() {
         System.out.println("\t\t\t\t\tLEMBAR JAWAB MAHASISWA");
         System.out.println("--------------------------------------------------");
-        System.out.println(mataKuliah.getFakultas());
+        System.out.println("Fakultas        : " + mataKuliah.getFakultas());
         System.out.println("Matakuliah      : " + mataKuliah.getNama());
         System.out.println("Nama dosen      : " + dosen.getNama());
         System.out.println("Semester        : " + semester);
         System.out.println("Hari / Tanggal  : " + tanggal);
         System.out.println("Nama ujian      : " + namaUjian);
-        
+
         int amount = 0;    // menghitung jumlah soal
-        /* Ujian Pilihan ganda. */
-        boolean isFirst = true;
+        boolean isFirst = true; // Flag to track the first occurrence of each type
+
         for (SoalUjian soal : listSoal) {
-            if (soal instanceof SoalPilihanGanda) {
+            /* Ujian Pilihan ganda. */
+            if (soal instanceof SoalPilihanGanda pilgan) {
                 if (isFirst) {
                     System.out.println();
                     System.out.println("===================================================");
@@ -85,15 +94,12 @@ public class Ujian {
                     System.out.println("===================================================");
                     isFirst = false;
                 }
-                System.out.printf("%02d. %s", ++amount, ((SoalPilihanGanda) soal).getSoal());
-                soal.jawabLangsung();
+                System.out.printf("%02d. %s", ++amount, pilgan.getSoal());
+                pilgan.jawab();
             }
-        }
 
-        /* Ujian Isian. */
-        isFirst = true;
-        for (SoalUjian soal : listSoal) {
-            if (soal instanceof SoalIsian) {
+            /* Ujian Isian. */
+            if (soal instanceof SoalIsian isian) {
                 if (isFirst) {
                     System.out.println();
                     System.out.println("===================================================");
@@ -101,15 +107,12 @@ public class Ujian {
                     System.out.println("===================================================");
                     isFirst = false;
                 }
-                System.out.printf("%02d. %s", ++amount, soal.getPertanyaan());
-                soal.jawabLangsung();
+                System.out.printf("%02d. %s", ++amount, isian.getPertanyaan());
+                isian.jawab();
             }
-        }
 
-        /* Ujian Esai. */
-        isFirst = true;
-        for (SoalUjian soal : listSoal) {
-            if (soal instanceof SoalIsian) {
+            /* Ujian Esai. */
+            if (soal instanceof SoalEsai esai) {
                 if (isFirst) {
                     System.out.println();
                     System.out.println("===================================================");
@@ -117,13 +120,9 @@ public class Ujian {
                     System.out.println("===================================================");
                     isFirst = false;
                 }
-                System.out.printf("%02d. %s", ++amount, soal.getPertanyaan());
-                soal.jawabLangsung();
+                System.out.printf("%02d. %s", ++amount, esai.getPertanyaan());
+                esai.jawab();
             }
         }
     }
-
-    /* Getters / Setters */
-
-
 }
