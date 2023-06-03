@@ -55,11 +55,11 @@ class SoalPilihanGanda extends SoalUjian {
         Scanner scanner = new Scanner(System.in);
         char input;
         do {
-            System.out.print("Masukkan simpanJawabanan Anda: ");
+            System.out.print("Masukkan jawaban Anda: ");
             input = scanner.nextLine().toUpperCase().charAt(0);
 
             if ((input < 65) || (input >= 65 + pilihanJawaban.length))
-                System.out.println("Masukkan simpanJawabanan yang sesuai!");
+                System.out.println("Masukkan jawaban yang sesuai!");
 
         } while ((input < 65) || (input >= 65 + pilihanJawaban.length));
 
@@ -86,10 +86,10 @@ class SoalPilihanGanda extends SoalUjian {
         var sb = new StringBuilder();
         sb.append(soal).append("\n");
         char option = 65; // 65 adalah A.
-        for (Jawaban simpanJawabanan : pilihanJawaban)
+        for (Jawaban jawaban : pilihanJawaban)
             sb.append("\t")
-                    .append(option++)
-                    .append(simpanJawabanan.getLabel()).append("\n");
+                    .append(option++).append(". ")
+                    .append(jawaban.getLabel()).append("\n");
         return sb.toString();
     }
 }
@@ -101,7 +101,7 @@ class SoalIsian extends SoalUjian {
     }
 
     /**
-     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah simpanJawabanan secara langsung.
+     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah jawaban secara langsung.
      * */
     public void jawab() {
         Scanner scanner = new Scanner(System.in);
@@ -143,7 +143,7 @@ class SoalEsai extends SoalUjian {
     }
 
     /**
-     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah simpanJawabanan secara langsung.
+     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah jawaban secara langsung.
      * */
     public void jawab() {
         Scanner scanner = new Scanner(System.in);
