@@ -82,17 +82,19 @@ public class Ujian {
         System.out.println("Nama ujian      : " + namaUjian);
 
         int amount = 0;    // menghitung jumlah soal
-        boolean isFirst = true; // Flag to track the first occurrence of each type
 
+        /* Array indikator soal pertama*/
+        boolean[] isFirst = new boolean[] {true, true, true};
+        /* List soal sudah dianggap terurut: Pilihan ganda - Isian - Esai. */
         for (SoalUjian soal : listSoal) {
             /* Ujian Pilihan ganda. */
             if (soal instanceof SoalPilihanGanda pilgan) {
-                if (isFirst) {
+                if (isFirst[0]) {
                     System.out.println();
                     System.out.println("===================================================");
                     System.out.println("\t\t\t\t\tSoal Pilihan Ganda");
                     System.out.println("===================================================");
-                    isFirst = false;
+                    isFirst[0] = false;
                 }
                 System.out.printf("%02d. %s", ++amount, pilgan.getSoal());
                 pilgan.jawab();
@@ -100,12 +102,12 @@ public class Ujian {
 
             /* Ujian Isian. */
             if (soal instanceof SoalIsian isian) {
-                if (isFirst) {
+                if (isFirst[1]) {
                     System.out.println();
                     System.out.println("===================================================");
                     System.out.println("\t\t\t\t\tSoal Isian");
                     System.out.println("===================================================");
-                    isFirst = false;
+                    isFirst[1] = false;
                 }
                 System.out.printf("%02d. %s", ++amount, isian.getPertanyaan());
                 isian.jawab();
@@ -113,12 +115,12 @@ public class Ujian {
 
             /* Ujian Esai. */
             if (soal instanceof SoalEsai esai) {
-                if (isFirst) {
+                if (isFirst[2]) {
                     System.out.println();
                     System.out.println("===================================================");
                     System.out.println("\t\t\t\t\tSoal Esai");
                     System.out.println("===================================================");
-                    isFirst = false;
+                    isFirst[2] = false;
                 }
                 System.out.printf("%02d. %s", ++amount, esai.getPertanyaan());
                 esai.jawab();
