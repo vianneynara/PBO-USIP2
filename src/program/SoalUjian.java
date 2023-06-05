@@ -36,14 +36,14 @@ class SoalPilihanGanda extends SoalUjian {
         this.pilihanJawaban = pilihanJawaban;
     }
 
-    public void tampilkanJawaban() {
+    public void tampilkanPilihan() {
         for (int i = 0; i < pilihanJawaban.length; i++) {
             System.out.println("\t" + (char) ('A' + i) + ". " + pilihanJawaban[i]);
         }
     }
 
     /**
-     * Metode ini mensimpanJawaban pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
+     * Metode ini menyimpan pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
      * pilihan yang diberikan.
      * <br><br><center><code>
      *     (input < 65) || (input >= 65 + pilihanJawaban.length)
@@ -136,10 +136,8 @@ class SoalEsai extends SoalUjian {
     private String namaFile;
     private String linkFile;
 
-    public SoalEsai(String soal, String namaFile, String linkFile) {
+    public SoalEsai(String soal) {
         super(soal);
-        this.namaFile = namaFile;
-        this.linkFile = linkFile;
     }
 
     /**
