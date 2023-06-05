@@ -4,37 +4,52 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        MataKuliah mataKuliah = new MataKuliah("Informatika", "Sains Dan Teknologi");
-        Dosen dosen = new Dosen("Tatik","33453535");
-        Jawaban[] jawabans = {
+        MataKuliah mataKuliah = new MataKuliah("Informatika", "Sains dan Teknologi");
+        Dosen dosen = new Dosen("Tatik", "33453535");
+        Jawaban[] pilihanSoal1 = {
                 new Jawaban("Jakarta"),
                 new Jawaban("Bandung"),
                 new Jawaban("Malang"),
                 new Jawaban("Kalimantan")
         };
-        Jawaban [] jawabans1 = {
-                new Jawaban("20 Agustus 1956"),
-                new Jawaban("18 September 1893"),
+        Jawaban[] pilihanSoal2 = {
+                new Jawaban("19 Agustus 1945"),
+                new Jawaban("18 Agustus 1945"),
                 new Jawaban("17 Agustus 1945"),
-                new Jawaban("17 Agustus 1959")
-
+                new Jawaban("16 Agustus 1945")
         };
-        Jawaban [] jawabans2 = {
+        Jawaban[] pilihanSoal3 = {
                 new Jawaban("Teluk"),
                 new Jawaban("Sungai"),
-                new Jawaban("pantai"),
+                new Jawaban("Pantai"),
                 new Jawaban("Tanjung")
         };
         SoalUjian[] listSoal = {
-                new SoalPilihanGanda("Ibu kota Indonesia ? ",jawabans,jawabans[0]),
-                new SoalPilihanGanda("Kapan Indonesia Merdeka ? ",jawabans1, jawabans1[2]),
-                new SoalPilihanGanda("Daratan yang menjorok kelaut disebut ? ",jawabans2, jawabans2[3]),
-                new SoalIsian("Heman pemakan daging disebut ?",new Jawaban("Karnivora")),
-                new SoalIsian("Heman pemakan Segala disebut ?",new Jawaban("Omnivora")),
-                new SoalIsian(" Tahun berapa kapal titanic tenggelam?",new Jawaban("1912")),
-                new SoalEsai("Jelaskan kenapa terjadinya perang antara pelestina dengan israel ?","gambar.jpg","hhtps:jshisisds.com")
+                new SoalPilihanGanda(
+                        "Ibu kota Indonesia? ", 
+                        pilihanSoal1, 
+                        pilihanSoal1[0]),
+                new SoalPilihanGanda(
+                        "Kapan Indonesia Merdeka? ",
+                        pilihanSoal2,
+                        pilihanSoal2[2]),
+                new SoalPilihanGanda(
+                        "Daratan yang menjorok ke laut disebut? ",
+                        pilihanSoal3,
+                        pilihanSoal3[3]),
+                new SoalIsian(
+                        "Heman pemakan daging disebut?",
+                        new Jawaban("Karnivora")),
+                new SoalIsian(
+                        "Heman pemakan segala disebut?",
+                        new Jawaban("Omnivora")),
+                new SoalIsian(
+                        "Tahun berapa kapal Titanic tenggelam?",
+                        new Jawaban("1912")),
+                new SoalEsai(
+                        "Jelaskan latar belakang terjadinya perang antara Palestina dengan Israel?")
         };
-        Ujian ujian = new Ujian(listSoal,mataKuliah,dosen,"sdsds","2",new Date());
+        Ujian ujian = new Ujian(listSoal, mataKuliah, dosen, "sdsds", "2", new Date());
         ujian.startUjian();
     }
 }
