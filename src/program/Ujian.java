@@ -18,7 +18,7 @@ public class Ujian {
              getSoalIsian(listSoal),
              getSoalEsai(listSoal)
         )
-        /* Mengkonversi Stream menjadi Array. */
+        /* Mengkonversi Stream menjadi Array bertipe SoalUjian. */
         .flatMap(Arrays::stream)
         .toArray(SoalUjian[]::new);
 
@@ -98,6 +98,7 @@ public class Ujian {
                 }
                 System.out.printf("%02d. %s", ++amount, pilgan.getSoal());
                 pilgan.jawab();
+                System.out.println();
             }
 
             /* Ujian Isian. */
@@ -110,7 +111,9 @@ public class Ujian {
                     isFirst[1] = false;
                 }
                 System.out.printf("%02d. %s", ++amount, isian.getPertanyaan());
+                System.out.println();
                 isian.jawab();
+                System.out.println();
             }
 
             /* Ujian Esai. */
@@ -124,6 +127,7 @@ public class Ujian {
                 }
                 System.out.printf("%02d. %s", ++amount, esai.getPertanyaan());
                 esai.jawab();
+                System.out.println();
             }
         }
     }
