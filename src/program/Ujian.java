@@ -18,7 +18,7 @@ public class Ujian {
              getSoalIsian(listSoal),
              getSoalEsai(listSoal)
         )
-        /* Mengkonversi Stream menjadi Array. */
+        /* Mengkonversi Stream menjadi Array bertipe SoalUjian. */
         .flatMap(Arrays::stream)
         .toArray(SoalUjian[]::new);
 
