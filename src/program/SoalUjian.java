@@ -6,6 +6,7 @@ public abstract class SoalUjian {
     
     protected String soal;
     protected Jawaban kunciJawaban;
+    protected Jawaban inputJawaban;
 
     public SoalUjian(String soal) {
         this(soal, null);
@@ -74,14 +75,15 @@ class SoalPilihanGanda extends SoalUjian {
 
         simpanJawaban(pilihanJawaban[inputIndex]);
 
-        if (getKunciJawaban().getLabel().equalsIgnoreCase(pilihanJawaban[inputIndex].getLabel()))
+        if (getKunciJawaban().getLabel().equalsIgnoreCase(pilihanJawaban[inputIndex].getLabel())) {
             System.out.println("Jawaban Anda benar!");
+        }
         else
             System.out.println("Jawaban Anda salah!");
     }
 
     public void simpanJawaban(Jawaban jawaban) {
-        kunciJawaban = jawaban;
+        inputJawaban = jawaban;
     }
 
     public String getSoal() {
@@ -125,7 +127,7 @@ class SoalIsian extends SoalUjian {
     }
 
     public void simpanJawaban(Jawaban jawaban) {
-        kunciJawaban = jawaban;
+        inputJawaban = jawaban;
     }
 
     @Override
@@ -165,7 +167,7 @@ class SoalEsai extends SoalUjian {
      * @param linkFile link file.
      * */
     public void simpanJawaban(String namaFile, String linkFile) {
-        kunciJawaban = new Jawaban(namaFile, linkFile);
+        inputJawaban = new Jawaban(namaFile, linkFile);
     }
 
     @Override
