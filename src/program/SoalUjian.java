@@ -43,7 +43,7 @@ class SoalPilihanGanda extends SoalUjian {
     }
 
     /**
-     * Metode ini menyimpan pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
+     * Metode ini mensimpanJawaban pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
      * pilihan yang diberikan.
      * <br><br><center><code>
      *     (input < 65) || (input >= 65 + pilihanJawaban.length)
@@ -72,6 +72,7 @@ class SoalPilihanGanda extends SoalUjian {
             default -> 4;
         };
 
+        simpanJawaban(pilihanJawaban[inputIndex]);
         if (getKunciJawaban().getLabel().equalsIgnoreCase(pilihanJawaban[inputIndex].getLabel()))
             System.out.println("Jawaban Anda benar!");
         else
@@ -114,6 +115,7 @@ class SoalIsian extends SoalUjian {
         } while (input.length() > 20);
 
         Jawaban inputJawaban = new Jawaban(input);
+        simpanJawaban(inputJawaban);
 
         if (inputJawaban.getLabel().equalsIgnoreCase(getKunciJawaban().getLabel()))
             System.out.println("Jawaban Anda benar!");
@@ -145,7 +147,7 @@ class SoalEsai extends SoalUjian {
      * */
     public void jawab() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println();
+        System.out.println(super.getPertanyaan());
         System.out.print("Nama File     : ");
         namaFile = scanner.nextLine();
         System.out.print("Link gambar   :  ");
