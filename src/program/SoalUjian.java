@@ -146,11 +146,11 @@ class SoalEsai extends SoalUjian {
     }
 
     /**
-     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah jawaban secara langsung.
+     * Metode ini menyimpan Jawaban dan memberikan keputusan benar salah sebuah jawaban secara langsung.
      * */
     public void jawab() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(super.getPertanyaan());
+        System.out.println();
         System.out.print("Nama File     : ");
         namaFile = scanner.nextLine();
         System.out.print("Link gambar   :  ");
