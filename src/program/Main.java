@@ -99,7 +99,7 @@ public class Main {
                     System.out.println("===================================================");
                     isFirst[0] = false;
                 }
-                System.out.printf("%02d. %s", ++amount, pilgan.getSoal());
+                System.out.printf("%02d. %s%n", ++amount, pilgan.getSoal());
                 UjianUtility.jawab(pilgan);
                 System.out.println();
             }
@@ -113,7 +113,7 @@ public class Main {
                     System.out.println("===================================================");
                     isFirst[1] = false;
                 }
-                System.out.printf("%02d. %s", ++amount, isian.getPertanyaan());
+                System.out.printf("%02d. %s%n", ++amount, isian.getPertanyaan());
                 System.out.println();
                 UjianUtility.jawab(isian);
                 System.out.println();
@@ -128,7 +128,7 @@ public class Main {
                     System.out.println("===================================================");
                     isFirst[2] = false;
                 }
-                System.out.printf("%02d. %s", ++amount, esai.getPertanyaan());
+                System.out.printf("%02d. %s%n", ++amount, esai.getPertanyaan());
                 UjianUtility.jawab(esai);
                 System.out.println();
             }
