@@ -43,8 +43,6 @@ public class UjianUtility {
         return soalEsai.toArray(new SoalEsai[0]);
     }
 
-
-
     /**
      * Metode ini menyimpan pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
      * pilihan yang diberikan.
@@ -86,8 +84,6 @@ public class UjianUtility {
         else
             System.out.println("Jawaban Anda salah!");
     }
-    
-    
 
     /**
      * Metode ini menyimpan dan memberikan keputusan benar salah sebuah jawaban secara langsung.
