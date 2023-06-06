@@ -187,7 +187,7 @@ public class UjianUtility {
             else if (soal instanceof SoalIsian isian) {
                 if (isFirst[1]) {
                     System.out.println();
-                    System.out.println("\n===================================================");
+                    System.out.println("===================================================");
                     System.out.println("\t\t\t\t Soal Isian");
                     System.out.println("===================================================");
                     isFirst[1] = false;
@@ -201,7 +201,7 @@ public class UjianUtility {
             else if (soal instanceof SoalEsai esai) {
                 if (isFirst[2]) {
                     System.out.println();
-                    System.out.println("\n===================================================");
+                    System.out.println("===================================================");
                     System.out.println("\t\t\t\t Soal Esai");
                     System.out.println("===================================================");
                     isFirst[2] = false;
@@ -211,6 +211,8 @@ public class UjianUtility {
                 System.out.println();
             }
         }
+
+        System.out.println("---------------------------------------------------");
 
         return ujian;
     }
