@@ -10,6 +10,7 @@ public class Main {
      * Metode untuk menampilkan pemasukkan soal pilihan ganda.
      * @return {@link SoalPilihanGanda}
      * */
+    @Deprecated // Tidak digunakan.
     public static SoalPilihanGanda inputSoalPilihanGanda() {
         System.out.print("Pertanyaan    : ");
         var pertanyaan = sc.nextLine();
@@ -44,6 +45,7 @@ public class Main {
      * Metode untuk menampilkan pemasukkan soal isian.
      * @return {@link SoalIsian}
      * */
+    @Deprecated // Tidak digunakan.
     public static SoalIsian inputSoalIsian() {
         System.out.print("Pertanyaan    : ");
         var pertanyaan = sc.nextLine();
@@ -61,6 +63,7 @@ public class Main {
      * Metode untuk menampilkan pemasukkan soal esai.
      * @return {@link SoalEsai}
      * */
+    @Deprecated // Tidak digunakan.
     public static SoalEsai inputSoalEsai() {
         System.out.print("Pertanyaan    : ");
         var pertanyaan = sc.nextLine();
@@ -69,8 +72,6 @@ public class Main {
                 pertanyaan
         );
     }
-
-
 
     /**
      * Metode untuk mengetes tanpa input (Soal sudah diberikan).
