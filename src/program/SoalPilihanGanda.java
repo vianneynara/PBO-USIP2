@@ -36,10 +36,6 @@ public class SoalPilihanGanda extends SoalUjian {
         this.kunciJawaban = kunciJawaban;
     }
 
-    public void setInputJawaban(JawabanTunggal inputJawaban) {
-        this.inputJawaban = inputJawaban;
-    }
-
     /**
      * Mengembalikan string pilihan jawaban yang terdapat pada soal.
      * @return {@link String}
@@ -60,7 +56,7 @@ public class SoalPilihanGanda extends SoalUjian {
      * Menyimpan masukan jawaban ke kelas.
      * @param jawaban jawaban yang berisi label dari kelas {@link JawabanTunggal}.
      * */
-    public void simpanJawaban(JawabanTunggal jawaban) {
+    public void setInputJawaban(JawabanTunggal jawaban) {
         inputJawaban = jawaban;
     }
 

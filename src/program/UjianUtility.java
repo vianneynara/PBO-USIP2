@@ -75,7 +75,7 @@ public class UjianUtility {
         };
 
         /* Menyimpan jawaban. */
-        soal.simpanJawaban(soal.getPilihanJawaban()[inputIndex]);
+        soal.setInputJawaban(soal.getPilihanJawaban()[inputIndex]);
 
         /* Komparasi jawaban. */
         if (soal.getKunciJawaban().getLabel().equalsIgnoreCase(soal.getPilihanJawaban()[inputIndex].getLabel())) {
@@ -100,7 +100,7 @@ public class UjianUtility {
         } while (input.length() > 20);
 
         /* Menyimpan jawaban. */
-        soal.simpanJawaban(new JawabanTunggal(input));
+        soal.setInputJawaban(new JawabanTunggal(input));
 
         /* Komparasi jawaban. */
         if (soal.getInputJawaban().getLabel().equalsIgnoreCase(soal.getKunciJawaban().getLabel()))
@@ -121,7 +121,7 @@ public class UjianUtility {
         var linkFile = scanner.nextLine();
 
         /* Menyimpan jawaban. */
-        soal.simpanJawaban(new JawabanEsai(namaFile, linkFile));
+        soal.setInputJawaban(new JawabanEsai(namaFile, linkFile));
 
         System.out.println("Jawaban Anda sudah tersimpan!");
     }
