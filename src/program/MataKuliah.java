@@ -2,7 +2,7 @@ package program;
 
 /**
  * Kelas ini mengandung nama, fakultas, dan dosen dari sebuah mata kuliah.
- * */
+ */
 public class MataKuliah {
     private String nama;
     private String fakultas;
@@ -24,15 +24,4 @@ public class MataKuliah {
     public String getFakultas() {
         return fakultas;
     }
-
-    /* Setters */
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public void setFakultas(String fakultas) {
-        this.fakultas = fakultas;
-    }
 }
-

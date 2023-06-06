@@ -45,7 +45,11 @@ public class Main {
                         "Tahun berapa kapal Titanic tenggelam?",
                         new Jawaban("1912")),
                 new SoalEsai(
-                        "Jelaskan latar belakang terjadinya perang antara Palestina dengan Israel?")
+                        "Jelaskan latar belakang terjadinya perang antara Palestina dengan Israel?"),
+                new SoalEsai(
+                        "Jelaskan sejarah kemerdekaan Indonesia!"),
+                new SoalEsai(
+                        "Berikan tanggapan Anda mengenai ekonomi indonesia yang menurun!")
         };
         Ujian ujian = new Ujian(listSoal, mataKuliah, dosen, "Test I", "2", "12 Juni 2023");
         ujian.startUjian();
