@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UjianUtility {
-
-    private static final Scanner sc = new Scanner(System.in);
-
     /**
      * Mengembalikan soal bertipe {@link SoalPilihanGanda} dalam bentuk array dari list soal bertipe {@link SoalUjian}.
      * Proses dilakukan dengan mengiterasi setiap soal pada list soal dan dimasukkan ke dalam sebuah array.
