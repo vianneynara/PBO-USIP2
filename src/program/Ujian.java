@@ -9,10 +9,10 @@ public class Ujian {
     private Dosen dosen;
     private String namaUjian;
     private String semester;
-    private Date tanggal;
+    private String tanggal;
 
     /* Constructor utama. */
-    public Ujian(SoalUjian[] listSoal, MataKuliah mataKuliah, Dosen dosen, String namaUjian, String semester, Date tanggal) {
+    public Ujian(SoalUjian[] listSoal, MataKuliah mataKuliah, Dosen dosen, String namaUjian, String semester, String tanggal) {
         this.listSoal = Stream.of(
              getSoalPilihanGanda(listSoal),
              getSoalIsian(listSoal),
