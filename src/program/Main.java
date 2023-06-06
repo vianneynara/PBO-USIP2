@@ -71,74 +71,11 @@ public class Main {
     }
 
 
-    /**
-     * Metode utama untuk menjalankan ujian.
-     * */
-    public static void mulaiUjian(Ujian ujian) {
-        System.out.println("\t\t\t  LEMBAR JAWAB MAHASISWA");
-        System.out.println("--------------------------------------------------");
-        System.out.println("Fakultas        : " + ujian.getMataKuliah().getFakultas());
-        System.out.println("Matakuliah      : " + ujian.getMataKuliah().getNama());
-        System.out.println("Nama dosen      : " + ujian.getDosen().getNama());
-        System.out.println("Semester        : " + ujian.getSemester());
-        System.out.println("Hari / Tanggal  : " + ujian.getTanggal());
-        System.out.println("Nama ujian      : " + ujian.getNamaUjian());
-
-        int amount = 0;    // menghitung jumlah soal
-
-        /* Array indikator soal pertama*/
-        boolean[] isFirst = new boolean[]{true, true, true};
-        /* List soal sudah dianggap terurut: Pilihan ganda - Isian - Esai. */
-        for (SoalUjian soal : ujian.getListSoal()) {
-            /* Ujian Pilihan ganda. */
-            if (soal instanceof SoalPilihanGanda pilgan) {
-                if (isFirst[0]) {
-                    System.out.println();
-                    System.out.println("===================================================");
-                    System.out.println("\t\t\t\t Soal Pilihan Ganda");
-                    System.out.println("===================================================");
-                    isFirst[0] = false;
-                }
-                System.out.printf("%02d. %s%n", ++amount, pilgan.getSoal());
-                UjianUtility.jawab(pilgan);
-                System.out.println();
-            }
-
-            /* Ujian Isian. */
-            if (soal instanceof SoalIsian isian) {
-                if (isFirst[1]) {
-                    System.out.println();
-                    System.out.println("===================================================");
-                    System.out.println("\t\t\t\t Soal Isian");
-                    System.out.println("===================================================");
-                    isFirst[1] = false;
-                }
-                System.out.printf("%02d. %s%n", ++amount, isian.getPertanyaan());
-                System.out.println();
-                UjianUtility.jawab(isian);
-                System.out.println();
-            }
-
-            /* Ujian Esai. */
-            if (soal instanceof SoalEsai esai) {
-                if (isFirst[2]) {
-                    System.out.println();
-                    System.out.println("===================================================");
-                    System.out.println("\t\t\t\t Soal Esai");
-                    System.out.println("===================================================");
-                    isFirst[2] = false;
-                }
-                System.out.printf("%02d. %s%n", ++amount, esai.getPertanyaan());
-                UjianUtility.jawab(esai);
-                System.out.println();
-            }
-        }
-    }
 
     /**
      * Metode untuk mengetes tanpa input (Soal sudah diberikan).
      * */
-    public static void testTanpaInput() {
+    public static Ujian testTanpaInput() {
         MataKuliah mataKuliah = new MataKuliah("Pengetahuan Umum", "Pendidikan Guru Sekolah Dasar");
         Dosen dosen = new Dosen("Sri Hartati", "33453535");
         JawabanTunggal[] pilihanSoal1 = {
@@ -189,10 +126,13 @@ public class Main {
                         "Berikan tanggapan Anda mengenai ekonomi indonesia yang menurun!")
         };
         Ujian ujian = new Ujian(listSoal, mataKuliah, dosen, "Test I", "2", "12 Juni 2023");
-        mulaiUjian(ujian);
+        return UjianUtility.mulaiUjian(ujian);
     }
 
     public static void main(String[] args) {
-        testTanpaInput();
+        Ujian hasilUjian = testTanpaInput();
+
+        System.out.println();
+        System.out.println(UjianUtility.analisaJawaban(hasilUjian));
     }
 }
