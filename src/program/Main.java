@@ -28,7 +28,7 @@ public class Main {
                         pilihanSoal1,
                         pilihanSoal1[0]),
                 new SoalPilihanGanda(
-                        "Kapan Indonesia Merdeka? ",
+                        "Kapan Indonesia merdeka? ",
                         pilihanSoal2,
                         pilihanSoal2[2]),
                 new SoalPilihanGanda(
@@ -36,10 +36,10 @@ public class Main {
                         pilihanSoal3,
                         pilihanSoal3[3]),
                 new SoalIsian(
-                        "Heman pemakan daging disebut?",
+                        "Hewan pemakan daging disebut?",
                         new Jawaban("Karnivora")),
                 new SoalIsian(
-                        "Heman pemakan segala disebut?",
+                        "Hewan pemakan segala disebut?",
                         new Jawaban("Omnivora")),
                 new SoalIsian(
                         "Tahun berapa kapal Titanic tenggelam?",
