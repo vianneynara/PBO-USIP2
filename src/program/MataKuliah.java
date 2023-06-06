@@ -9,7 +9,7 @@ public class MataKuliah {
 
     /**
      * Constructor utama.
-     */
+     * */
     public MataKuliah(String nama, String fakultas) {
         this.nama = nama;
         this.fakultas = fakultas;
