@@ -115,7 +115,7 @@ public class UjianUtility {
 
     /**
      * Metode ini menyimpan JawabanTunggal dan memberikan keputusan benar salah sebuah jawaban secara langsung.
-     * @param soal saol bertipe {@link SoalEsai}
+     * @param soal soal bertipe {@link SoalEsai}
      * */
     public static void jawab(SoalEsai soal) {
         Scanner scanner = new Scanner(System.in);
