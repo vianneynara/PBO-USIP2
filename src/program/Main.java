@@ -2,8 +2,8 @@ package program;
 
 public class Main {
     public static void main(String[] args) {
-        MataKuliah mataKuliah = new MataKuliah("Informatika", "Sains dan Teknologi");
-        Dosen dosen = new Dosen("Tatik", "33453535");
+        MataKuliah mataKuliah = new MataKuliah("Pengetahuan Umum", "Pendidikan Guru Sekolah Dasar");
+        Dosen dosen = new Dosen("Sri Hartati", "33453535");
         Jawaban[] pilihanSoal1 = {
                 new Jawaban("Jakarta"),
                 new Jawaban("Bandung"),
@@ -24,15 +24,15 @@ public class Main {
         };
         SoalUjian[] listSoal = {
                 new SoalPilihanGanda(
-                        "Ibu kota Indonesia? ",
+                        "Ibu kota Indonesia?",
                         pilihanSoal1,
                         pilihanSoal1[0]),
                 new SoalPilihanGanda(
-                        "Kapan Indonesia merdeka? ",
+                        "Kapan Indonesia merdeka?",
                         pilihanSoal2,
                         pilihanSoal2[2]),
                 new SoalPilihanGanda(
-                        "Daratan yang menjorok ke laut disebut? ",
+                        "Daratan yang menjorok ke laut disebut?",
                         pilihanSoal3,
                         pilihanSoal3[3]),
                 new SoalIsian(

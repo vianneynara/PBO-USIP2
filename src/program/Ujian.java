@@ -72,7 +72,7 @@ public class Ujian {
      * Metode utama untuk menjalankan ujian.
      * */
     public void startUjian() {
-        System.out.println("\t\t\t\t\tLEMBAR JAWAB MAHASISWA");
+        System.out.println("\t\t\t\tLEMBAR JAWAB MAHASISWA");
         System.out.println("--------------------------------------------------");
         System.out.println("Fakultas        : " + mataKuliah.getFakultas());
         System.out.println("Matakuliah      : " + mataKuliah.getNama());
@@ -92,7 +92,7 @@ public class Ujian {
                 if (isFirst[0]) {
                     System.out.println();
                     System.out.println("===================================================");
-                    System.out.println("\t\t\t\t\tSoal Pilihan Ganda");
+                    System.out.println("\t\t\t\tSoal Pilihan Ganda");
                     System.out.println("===================================================");
                     isFirst[0] = false;
                 }
