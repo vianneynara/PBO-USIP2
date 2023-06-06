@@ -43,7 +43,7 @@ class SoalPilihanGanda extends SoalUjian {
     }
 
     /**
-     * Metode ini mensimpanJawaban pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
+     * Metode ini menyimpan pertanyaan secara langsung dengan masukan A hingga E menyesuaikan banyaknya
      * pilihan yang diberikan.
      * <br><br><center><code>
      *     (input < 65) || (input >= 65 + pilihanJawaban.length)
@@ -73,6 +73,7 @@ class SoalPilihanGanda extends SoalUjian {
         };
 
         simpanJawaban(pilihanJawaban[inputIndex]);
+
         if (getKunciJawaban().getLabel().equalsIgnoreCase(pilihanJawaban[inputIndex].getLabel()))
             System.out.println("Jawaban Anda benar!");
         else
@@ -102,7 +103,7 @@ class SoalIsian extends SoalUjian {
     }
 
     /**
-     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah jawaban secara langsung.
+     * Metode ini menyimpan dan memberikan keputusan benar salah sebuah jawaban secara langsung.
      * */
     public void jawab() {
         Scanner scanner = new Scanner(System.in);

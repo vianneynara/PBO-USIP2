@@ -1,7 +1,5 @@
 package program;
 
-import java.util.Date;
-
 public class Main {
     public static void main(String[] args) {
         MataKuliah mataKuliah = new MataKuliah("Informatika", "Sains dan Teknologi");
@@ -26,8 +24,8 @@ public class Main {
         };
         SoalUjian[] listSoal = {
                 new SoalPilihanGanda(
-                        "Ibu kota Indonesia? ", 
-                        pilihanSoal1, 
+                        "Ibu kota Indonesia? ",
+                        pilihanSoal1,
                         pilihanSoal1[0]),
                 new SoalPilihanGanda(
                         "Kapan Indonesia Merdeka? ",
@@ -49,7 +47,7 @@ public class Main {
                 new SoalEsai(
                         "Jelaskan latar belakang terjadinya perang antara Palestina dengan Israel?")
         };
-        Ujian ujian = new Ujian(listSoal, mataKuliah, dosen, "sdsds", "2", new Date());
+        Ujian ujian = new Ujian(listSoal, mataKuliah, dosen, "Test I", "2", "12 Juni 2023");
         ujian.startUjian();
     }
 }
