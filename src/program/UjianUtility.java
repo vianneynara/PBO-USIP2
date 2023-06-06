@@ -157,6 +157,8 @@ public class UjianUtility {
 
     /**
      * Metode utama untuk menjalankan ujian.
+     * @param ujian {@link Ujian}
+     * @return filled {@link Ujian}
      * */
     public static Ujian mulaiUjian(Ujian ujian) {
         System.out.println("\t\t\t  LEMBAR JAWAB MAHASISWA");
@@ -223,6 +225,7 @@ public class UjianUtility {
     /**
      * Metode untuk menganalisa performa serta jawaban yang benar atau salah dari sebuah ujian.
      * @param ujian {@link Ujian} yang sudah terisi input jawabannya.
+     * @return formatted {@link String}
      * */
     public static String analisaJawaban(Ujian ujian) {
         StringBuilder kesimpulan = new StringBuilder();
