@@ -79,6 +79,7 @@ public class UjianUtility {
             default -> 4;
         };
 
+        /* Menyimpan jawaban. */
         soal.simpanJawaban(soal.getPilihanJawaban()[inputIndex]);
 
         /* Komparasi jawaban. */
@@ -105,6 +106,7 @@ public class UjianUtility {
                 System.out.println("Maksimal 20 karakter.");
         } while (input.length() > 20);
 
+        /* Menyimpan jawaban. */
         soal.simpanJawaban(new JawabanTunggal(input));
 
         /* Komparasi jawaban. */
@@ -127,7 +129,190 @@ public class UjianUtility {
 
         /* Menyimpan jawaban. */
         soal.simpanJawaban(new JawabanEsai(namaFile, linkFile));
-        System.out.println("JawabanTunggal Anda sudah tersimpan!");
+
+        System.out.println("Jawaban Anda sudah tersimpan!");
     }
 
+    /**
+     * Mencocokan jawaban dengan kunci jawaban di {@link SoalPilihanGanda}.
+     * @return true or false
+     * */
+    public static boolean cek(JawabanTunggal j, SoalPilihanGanda soal) {
+        if (j.getLabel().equalsIgnoreCase(soal.getKunciJawaban().getLabel()))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Mencocokan jawaban dengan kunci jawaban di {@link SoalIsian}.
+     * @return true or false
+     * */
+    public static boolean cek(JawabanTunggal j, SoalIsian soal) {
+        if (j.getLabel().equalsIgnoreCase(soal.getKunciJawaban().getLabel()))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Metode utama untuk menjalankan ujian.
+     * */
+    public static Ujian mulaiUjian(Ujian ujian) {
+        System.out.println("\t\t\t  LEMBAR JAWAB MAHASISWA");
+        System.out.println("--------------------------------------------------");
+        System.out.println("Fakultas        : " + ujian.getMataKuliah().getFakultas());
+        System.out.println("Matakuliah      : " + ujian.getMataKuliah().getNama());
+        System.out.println("Nama dosen      : " + ujian.getDosen().getNama());
+        System.out.println("Semester        : " + ujian.getSemester());
+        System.out.println("Hari / Tanggal  : " + ujian.getTanggal());
+        System.out.println("Nama ujian      : " + ujian.getNamaUjian());
+
+        int jumlahSoal = 0;
+
+        /* Array indikator soal pertama*/
+        boolean[] isFirst = new boolean[]{true, true, true};
+        /* List soal sudah dianggap terurut: Pilihan ganda - Isian - Esai. */
+        for (SoalUjian soal : ujian.getListSoal()) {
+            /* Ujian Pilihan ganda. */
+            if (soal instanceof SoalPilihanGanda pilgan) {
+                if (isFirst[0]) {
+                    System.out.println();
+                    System.out.println("\n===================================================");
+                    System.out.println("\t\t\t\t Soal Pilihan Ganda");
+                    System.out.println("===================================================");
+                    isFirst[0] = false;
+                }
+                System.out.printf("%02d. %s%n", ++jumlahSoal, pilgan.getSoal());
+                UjianUtility.jawab(pilgan);
+                System.out.println();
+            }
+
+            /* Ujian Isian. */
+            else if (soal instanceof SoalIsian isian) {
+                if (isFirst[1]) {
+                    System.out.println();
+                    System.out.println("\n===================================================");
+                    System.out.println("\t\t\t\t Soal Isian");
+                    System.out.println("===================================================");
+                    isFirst[1] = false;
+                }
+                System.out.printf("%02d. %s%n", ++jumlahSoal, isian.getPertanyaan());
+                UjianUtility.jawab(isian);
+                System.out.println();
+            }
+
+            /* Ujian Esai. */
+            else if (soal instanceof SoalEsai esai) {
+                if (isFirst[2]) {
+                    System.out.println();
+                    System.out.println("\n===================================================");
+                    System.out.println("\t\t\t\t Soal Esai");
+                    System.out.println("===================================================");
+                    isFirst[2] = false;
+                }
+                System.out.printf("%02d. %s%n", ++jumlahSoal, esai.getPertanyaan());
+                UjianUtility.jawab(esai);
+                System.out.println();
+            }
+        }
+
+        return ujian;
+    }
+
+    /**
+     * Metode untuk menganalisa performa serta jawaban yang benar atau salah dari sebuah ujian.
+     * @param ujian {@link Ujian} yang sudah terisi input jawabannya.
+     * */
+    public static String analisaJawaban(Ujian ujian) {
+        StringBuilder kesimpulan = new StringBuilder();
+
+        /* List soal sudah dianggap terurut: Pilihan ganda - Isian - Esai. */
+        SoalUjian[] listSoal = ujian.getListSoal();
+
+        boolean hasilCek;
+        int nomor = 0;
+        int jumlahPilgan = UjianUtility.getSoalPilihanGanda(listSoal).length;
+        int jumlahIsian = UjianUtility.getSoalIsian(listSoal).length;
+        int benarPilgan = 0;
+        int benarIsian = 0;
+        int jumlahSoalNonEsai = 0;
+
+        kesimpulan.append("[ Performa / hasil analisa ujian ]\n");
+        kesimpulan.append("Jumlah keseluruhan soal: " + ujian.getListSoal().length);
+        kesimpulan.append("\n");
+
+        /* Array indikator soal pertama*/
+        boolean[] isFirst = new boolean[]{true, true, true};
+        for (SoalUjian soal : listSoal) {
+            /* Ujian Pilihan ganda. */
+            if (soal instanceof SoalPilihanGanda pilgan) {
+                jumlahSoalNonEsai++;
+                if (isFirst[0]) {
+                    kesimpulan.append("\n = Soal Pilihan Ganda = (%02d)\n".formatted(
+                            jumlahPilgan));
+                    isFirst[0] = false;
+                }
+
+                /* true jika benar, false jika salah. */
+                hasilCek = (UjianUtility.cek(pilgan.getInputJawaban(), pilgan));
+                benarPilgan += (hasilCek) ? 1 : 0;
+
+                kesimpulan.append("%02d. %s (%s) \n".formatted(
+                        ++nomor,
+                        pilgan.getInputJawaban().getLabel(),
+                        (hasilCek) ?
+                                "benar" :
+                                "salah"
+                        )
+                );
+            }
+
+            /* Ujian Isian. */
+            else if (soal instanceof SoalIsian isian) {
+                jumlahSoalNonEsai++;
+                if (isFirst[1]) {
+                    kesimpulan.append("\n = Soal Isian = (%02d)\n".formatted(
+                            jumlahIsian));
+                    isFirst[1] = false;
+                }
+
+                /* true jika benar, false jika salah. */
+                hasilCek = (UjianUtility.cek(isian.getInputJawaban(), isian));
+                benarIsian += (hasilCek) ? 1 : 0;
+
+                kesimpulan.append("%02d. %s (%s) \n".formatted(
+                        ++nomor,
+                        isian.getInputJawaban().getLabel(),
+                        (hasilCek) ?
+                                "benar" :
+                                "salah"
+                        )
+                );
+            }
+
+            /* Ujian Esai. */
+            else if (soal instanceof SoalEsai esai) {
+                if (isFirst[2]) {
+                    kesimpulan.append("\n = Soal Esai = (%02d)\n".formatted(
+                            UjianUtility.getSoalEsai(listSoal).length));
+                    isFirst[2] = false;
+                }
+
+                kesimpulan.append("%02d. [%s](%s) \n".formatted(
+                        ++nomor,
+                        esai.getInputJawaban().getNamaFile(),
+                        esai.getInputJawaban().getLinkFile()
+                        )
+                );
+            }
+        }
+
+        kesimpulan.append("\nPilihan ganda benar  : " + benarPilgan + " / " + jumlahPilgan);
+        kesimpulan.append("\nIsian benar          : " + benarIsian + " / " + jumlahIsian);
+        kesimpulan.append("\nTotal jawaban benar  : " + (benarPilgan + benarIsian) + " / " + jumlahSoalNonEsai);
+        kesimpulan.append("\nHarap koreksi jawaban esai untuk menentukan skor akhir.");
+
+        return kesimpulan.toString();
+    }
 }
