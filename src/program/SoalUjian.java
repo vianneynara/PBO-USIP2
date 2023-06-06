@@ -144,7 +144,7 @@ class SoalEsai extends SoalUjian {
     }
 
     /**
-     * Metode ini mensimpanJawaban dan memberikan keputusan benar salah sebuah jawaban secara langsung.
+     * Metode ini menyimpanJawaban dan memberikan keputusan benar salah sebuah jawaban secara langsung.
      * */
     public void jawab() {
         Scanner scanner = new Scanner(System.in);
