@@ -46,12 +46,11 @@ public class SoalPilihanGanda extends SoalUjian {
      * */
     public String getPilihan() {
         var sb = new StringBuilder();
-        for (int i = 0; i < pilihanJawaban.length; i++) {
+        char option = 65; // 65 adalah A.
+        for (JawabanTunggal jawaban : pilihanJawaban)
             sb.append("\t")
-                    .append((char) ('A' + i))
-                    .append(". ")
-                    .append(pilihanJawaban[i]);
-        }
+                    .append(option++).append(". ")
+                    .append(jawaban.getLabel()).append("\n");
         return sb.toString();
     }
 
@@ -64,13 +63,6 @@ public class SoalPilihanGanda extends SoalUjian {
     }
 
     public String getSoal() {
-        var sb = new StringBuilder();
-        sb.append(soal).append("\n");
-        char option = 65; // 65 adalah A.
-        for (JawabanTunggal jawaban : pilihanJawaban)
-            sb.append("\t")
-                    .append(option++).append(". ")
-                    .append(jawaban.getLabel()).append("\n");
-        return sb.toString();
+        return soal + "\n" + getPilihan();
     }
 }
